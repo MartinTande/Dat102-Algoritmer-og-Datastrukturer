@@ -7,11 +7,12 @@ public class Trekant implements Figur{
 		this.sideLengde = sideLengde;
 	}
 
+	@Override
 	public double areal() {
-		// TODO Auto-generated method stub
 		return sideLengde*sideLengde/2;
 	}
-
+	
+	@Override
 	public void tegn() {
 		for (int i = 1; i <= sideLengde; i++) {
 			for (int j = 1; j <= i; j++) {
