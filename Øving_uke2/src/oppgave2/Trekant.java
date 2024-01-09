@@ -13,8 +13,11 @@ public class Trekant implements Figur{
 	}
 
 	public void tegn() {
-		for (int i = 0; i < sideLengde; i++) {
-			System.out.print("*");
+		for (int i = 1; i <= sideLengde; i++) {
+			for (int j = 1; j <= i; j++) {
+				System.out.print("*");
+			}
+			System.out.println();
 	
 		}	
 	}
