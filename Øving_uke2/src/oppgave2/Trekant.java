@@ -19,9 +19,6 @@ public class Trekant implements Figur{
 				System.out.print("*");
 			}
 			System.out.println();
-	
 		}	
 	}
-	
-	
 }
