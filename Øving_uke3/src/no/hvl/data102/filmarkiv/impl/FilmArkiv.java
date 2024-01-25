@@ -1,9 +1,11 @@
 package no.hvl.data102.filmarkiv.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import no.hvl.data102.filmarkiv.adt.FilmArkivADT;
-import no.hvl.data102.filmarkiv.adt.Sjanger;
+
 
 public class FilmArkiv implements FilmArkivADT{
 	
@@ -17,7 +19,11 @@ public class FilmArkiv implements FilmArkivADT{
 	
 	@Override
 	public Film finnFilm(int nr) {
-		// TODO Auto-generated method stub
+		for (Film film : tabell) {
+			if (film.getFilmNr() == nr) {
+				return film;
+			}
+		}
 		return null;
 	}
 
@@ -30,32 +36,64 @@ public class FilmArkiv implements FilmArkivADT{
 		antall++;		
 	}
 	
+	@Override
+	public boolean slettFilm(int filmNr) {
+		for (Film film : tabell) {
+			if (film.getFilmNr() == filmNr) {
+				tabell[filmNr] = tabell[tabell.length-1];
+				antall--;
+				return true;
+			}
+		}
+		return false;
+	}	
+	
 	private void utvidTabell() {
 		tabell = Arrays.copyOf(tabell, tabell.length * 2);
 	}
 	
 	@Override
-	public boolean slettFilm(int filmNr) {
-		// TODO Auto-generated method stub
-		return false;
+	public Film[] soekTittel(String delstreng) {
+		Film[] tabellTittelSoek = new Film[tabell.length];
+		int i = 0;
+		for (Film film : tabell) {
+			if (film.getTittel().contains(delstreng)) {
+				tabellTittelSoek[i] = film;
+				i++;
+			}
+		}
+		return tabellTittelSoek;
 	}
-
+	
 	@Override
 	public Film[] soekProdusent(String delstreng) {
-		// TODO Auto-generated method stub
-		return null;
+		Film[] tabellProdusentSoek = new Film[tabell.length];
+		int i = 0;
+		for (Film film : tabell) {
+			if (film.getProdusent().contains(delstreng)) {
+				tabellProdusentSoek[i] = film;
+				i++;
+			}
+		}
+		return tabellProdusentSoek;
 	}
 
 	@Override
 	public int antall(Sjanger sjanger) {
-		// TODO Auto-generated method stub
-		return 0;
+		int antallSjanger = 0;
+		for (Film film : tabell) {
+			if (film.sjanger == sjanger) {
+				antallSjanger++;
+			}
+		}
+		return antallSjanger;
 	}
 
 	@Override
 	public int antall() {
-		// TODO Auto-generated method stub
-		return 0;
+		return antall;
 	}
+
+
 
 }
