@@ -1,9 +1,6 @@
 package no.hvl.data102.filmarkiv.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import no.hvl.data102.filmarkiv.adt.FilmArkivADT;
 
 
@@ -78,16 +75,16 @@ public class FilmArkiv implements FilmArkivADT{
 		return tabellProdusentSoek;
 	}
 
-	@Override
-	public int antall(Sjanger sjanger) {
-		int antallSjanger = 0;
-		for (Film film : tabell) {
-			if (film.sjanger == sjanger) {
-				antallSjanger++;
-			}
-		}
-		return antallSjanger;
-	}
+//	@Override
+//	public int antall(Sjanger sjanger) {
+//		int antallSjanger = 0;
+//		for (Film film : tabell) {
+//			if (film.sjanger == sjanger) {
+//				antallSjanger++;
+//			}
+//		}
+//		return antallSjanger;
+//	}
 
 	@Override
 	public int antall() {

@@ -41,7 +41,7 @@ public interface FilmArkivADT {
 	* @param sjanger 
 	* @return antall filmer av gitt sjanger.
 	*/
-	 int antall(Sjanger sjanger);
+	// int antall(Sjanger sjanger);
 	/**
 	* @return antall filmer i arkivet
 	*/
