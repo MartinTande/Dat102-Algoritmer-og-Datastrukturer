@@ -1,8 +1,9 @@
 package no.hvl.data102.filmarkiv.adt;
 
 import no.hvl.data102.filmarkiv.impl.Film;
+import no.hvl.data102.filmarkiv.impl.Sjanger;
 
-public interface FilmArkivADT {
+public interface FilmarkivADT {
 	
 	/**
 	 * Hente en film med gitt nr fra arkivet
@@ -41,7 +42,7 @@ public interface FilmArkivADT {
 	* @param sjanger 
 	* @return antall filmer av gitt sjanger.
 	*/
-	// int antall(Sjanger sjanger);
+	 int antall(Sjanger sjanger);
 	/**
 	* @return antall filmer i arkivet
 	*/

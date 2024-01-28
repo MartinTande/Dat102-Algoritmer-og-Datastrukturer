@@ -7,17 +7,18 @@ public class Film {
 	private String produsent;
 	private String tittel;
 	private int lanseringsAar;
-	//private enum sjanger;
+	private Sjanger sjanger;
 	private String filmSelskap;
 	
 	public Film() {}
 	
-	public Film(int filmNr, String produsent, String tittel, int lanseringsAar, String filmSelskap) {
+	public Film(int filmNr, String produsent, String tittel, int lanseringsAar, String filmSelskap, Sjanger sjanger) {
 		this.filmNr = filmNr;
 		this.produsent = produsent;
 		this.tittel = tittel;
 		this.lanseringsAar = lanseringsAar;
 		this.filmSelskap = filmSelskap;
+		this.sjanger = sjanger;
 	}
 	
 	public int getFilmNr() {
@@ -60,6 +61,14 @@ public class Film {
 		this.filmSelskap = filmSelskap;
 	}
 
+	public Sjanger getSjanger() {
+		return sjanger;
+	}
+
+	public void setSjanger(Sjanger sjanger) {
+		this.sjanger = sjanger;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(filmNr);
@@ -76,6 +85,4 @@ public class Film {
 		Film other = (Film) obj;
 		return filmNr == other.filmNr;
 	}
-	
-	
 }
