@@ -42,34 +42,5 @@ class SortArrayTest {
 		assertArrayEquals(fasit, SortArray.insertionSort3(tabellB));
 		assertArrayEquals(fasit, SortArray.insertionSort3(tabellC));
 	}
-	
-	@Test
-	void testSelectionSort() {
-		SortAlgorithm.selectionSort(tabellA);
-		SortAlgorithm.selectionSort(tabellB);
-		SortAlgorithm.selectionSort(tabellC);
-		assertArrayEquals(fasit, tabellA);
-		assertArrayEquals(fasit, tabellB);
-		assertArrayEquals(fasit, tabellC);
-	}
-	
-	@Test
-	void testMergeSort() {
-		SortAlgorithm.mergeSort(tabellA);
-		SortAlgorithm.mergeSort(tabellB);
-		SortAlgorithm.mergeSort(tabellC);
-		assertArrayEquals(fasit, tabellA);
-		assertArrayEquals(fasit, tabellB);
-		assertArrayEquals(fasit, tabellC);
-	}
-	
-	@Test
-	void testQuickSort() {
-		SortAlgorithm.quickSort(tabellA);
-		SortAlgorithm.quickSort(tabellB);
-		SortAlgorithm.quickSort(tabellC);
-		assertArrayEquals(fasit, tabellA);
-		assertArrayEquals(fasit, tabellB);
-		assertArrayEquals(fasit, tabellC);
-	}
+
 }

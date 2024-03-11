@@ -1,4 +1,4 @@
-package oppgave1;
+package oppgave2;
 
 public class SortAlgorithm {
 	public static <T extends Comparable<? super T>> void insertionSort(T[] a) {

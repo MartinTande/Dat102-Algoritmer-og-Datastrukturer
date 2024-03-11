@@ -42,7 +42,6 @@ public class Parentessjekker {
 		return false;
 	}
 
-	
 	private static boolean erSluttParentes(char c) {
 		char[] sluttParenteser = {')', ']','}'};
 		for (char sP : sluttParenteser) {

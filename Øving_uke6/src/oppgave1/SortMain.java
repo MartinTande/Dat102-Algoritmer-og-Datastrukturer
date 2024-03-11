@@ -6,7 +6,7 @@ public class SortMain {
 
 	public static void main(String[] args) {		
 		
-		int n = 40_000;
+		int n = 40_001;
 		int antall = 10;
 		
 		Integer[][] a = genererRandomTabell(antall, n);
@@ -20,7 +20,7 @@ public class SortMain {
 		long startTime = System.currentTimeMillis();
 		
 		for (int i = 0; i < antall; i++){
-			a[i] = SortArray.insertionSort(a[i]); // a[i] blir ein eindimensjonal tabell
+			a[i] = SortArray.insertionSort(a[i]); // a[i] blir en eindimensjonal tabell
 		}
 		long stopTime = System.currentTimeMillis();
 		long elapsedTime = (stopTime - startTime)/antall;
@@ -31,16 +31,16 @@ public class SortMain {
 		// Sorteringsalgoritme 2
 		long startTime2 = System.currentTimeMillis();
 		for (int i = 0; i < antall; i++){
-			a[i] = SortArray.insertionSort2(a[i]); // a[i] blir ein eindimensjonal tabell
+			a[i] = SortArray.insertionSort3(a[i]); // a[i] blir en eindimensjonal tabell
 		}
 		long stopTime2 = System.currentTimeMillis();
 		long elapsedTime2 = (stopTime2 - startTime2)/antall;
-		System.out.println("Sorteringsalgoritme 2 tok: " + elapsedTime2 + "ms");
+		System.out.println("Sorteringsalgoritme 3 tok: " + elapsedTime2 + "ms");
 	}
 	
 	
 	public static Integer[][] genererRandomTabell(int antall, int n) {
-		// set inn tilfeldige heiltal i alle rekker
+		// setter inn tilfeldige heltall i alle rekker
 		Random tilfeldig = new Random();
 		Integer[][] a = new Integer[antall][n];
 		for (int i = 0; i < antall; i++){

@@ -81,8 +81,5 @@ public class SortArray {
 		T tempSmall = a[0];
 		a[0] = smallest;
 		a[smallestIndex] = tempSmall;
-	}
-	
-
-	
+	}	
 }
