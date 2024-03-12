@@ -1,6 +1,7 @@
 package oppgave1;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MengdeTabell<T> implements MengdeADT<T>{
 
@@ -18,12 +19,13 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 		tabell = (T[]) new Object[kapasitet];
 		antall = 0;
 	}	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Arrays.deepHashCode(tabell);
+		result = prime * result + Objects.hash(antall);
 		return result;
 	}
 
@@ -35,8 +37,9 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MengdeTabell other = (MengdeTabell) obj;
-		return Arrays.deepEquals(tabell, other.tabell);
+		@SuppressWarnings("unchecked")
+		MengdeTabell<T> other = (MengdeTabell<T>) obj;
+		return antall == other.antall && Arrays.deepEquals(tabell, other.tabell);
 	}
 
 	@Override
@@ -57,7 +60,8 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public boolean erDelmengdeAv(MengdeADT<T> annenMengde) {
-		for (T element : tabell) {
+		for(int i=0; i<antall; i++) {
+			T element = tabell[i];
 			if (!annenMengde.inneholder(element)) {
 				return false;
 			}
@@ -67,13 +71,13 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public boolean erLik(MengdeADT<T> annenMengde) {
-		T[] annenTabell = annenMengde.tilTabell();
-		for (T element : annenTabell) {
+		for(int i=0; i<annenMengde.antallElementer(); i++) {
+			T element = tabell[i];
 			if (!annenMengde.inneholder(element)) {
 				return false;
 			}
 		}
-		if (annenMengde.antallElementer() == antall) {
+		if (annenMengde.antallElementer() != antall) {
 			return false;
 		}
 		return true;
@@ -81,7 +85,8 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public boolean erDisjunkt(MengdeADT<T> annenMengde) {
-		for (T element : tabell) {
+		for(int i=0; i<antall; i++) {
+			T element = tabell[i];
 			if (annenMengde.inneholder(element)) {
 				return false;
 			}
@@ -92,15 +97,10 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 	@Override
 	public MengdeADT<T> snitt(MengdeADT<T> annenMengde) {
 		MengdeADT<T> snittMengde = new MengdeTabell<>();
-		T[] annenTabell = annenMengde.tilTabell();
 		
-		for (T element : tabell) {
-			if (!annenMengde.inneholder(element)) {
-				snittMengde.leggTil(element);
-			}
-		}
-		for (T element : annenTabell) {
-			if (!annenMengde.inneholder(element)) {
+		for(int i=0; i<antall; i++) {
+			T element = tabell[i];
+			if (annenMengde.inneholder(element)) {
 				snittMengde.leggTil(element);
 			}
 		}
@@ -112,12 +112,7 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 	public MengdeADT<T> union(MengdeADT<T> annenMengde) {
 		MengdeADT<T> unionMengde = new MengdeTabell<>();
 		unionMengde.leggTilAlleFra(annenMengde);
-		
-		for (T element : tabell) {
-			if (!annenMengde.inneholder(element)) {
-				unionMengde.leggTil(element);
-			}
-		}
+		unionMengde.leggTilAlleFra(this);
 
 		return unionMengde;
 	}
@@ -126,7 +121,8 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 	public MengdeADT<T> minus(MengdeADT<T> annenMengde) {
 		MengdeADT<T> minusMengde = new MengdeTabell<>();
 		
-		for (T element : tabell) {
+		for(int i=0; i<antall; i++) {
+			T element = tabell[i];
 			if (!annenMengde.inneholder(element)) {
 				minusMengde.leggTil(element);
 			}
@@ -150,8 +146,11 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 	@Override
 	public void leggTilAlleFra(MengdeADT<T> annenMengde) {
 		T[] annenTabell = annenMengde.tilTabell();
-		for (T element : annenTabell) {
-			leggTil(element);
+		for (int i = 0; i < annenMengde.antallElementer(); i++) {
+			T element = annenTabell[i];
+			if (!this.inneholder(element)) {
+				leggTil(element);
+			}
 		}
 	}
 
