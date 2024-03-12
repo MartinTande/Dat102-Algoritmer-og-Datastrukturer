@@ -11,16 +11,18 @@ class MengdeTabellTest {
 	MengdeADT<Integer> intMengde2;
 	MengdeADT<Integer> intMengde3;
 	MengdeADT<Integer> tomMengde;
+	MengdeADT<Integer> tomMengde2;
 	MengdeADT<Integer> delMengde;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 
-		intMengde1 = new MengdeTabell<>(4);
-		intMengde2 = new MengdeTabell<>();
-		intMengde3 = new MengdeTabell<>();
-		tomMengde = new MengdeTabell<>();
-		delMengde = new MengdeTabell<>();
+		intMengde1 = new LenketMengde<>();
+		intMengde2 = new LenketMengde<>();
+		intMengde3 = new LenketMengde<>();
+		tomMengde = new LenketMengde<>();
+		tomMengde2 = new LenketMengde<>();
+		delMengde = new LenketMengde<>();
 		
 		intMengde1.leggTil(1);
 		intMengde1.leggTil(2);
@@ -104,29 +106,26 @@ class MengdeTabellTest {
 	
 	@Test
 	void testSnitt() {
-		MengdeADT<Integer> mengdeSnitt = new MengdeTabell<>();
-		mengdeSnitt.leggTil(1);
-		mengdeSnitt.leggTil(2);
+		tomMengde.leggTil(1);
+		tomMengde.leggTil(2);
 		delMengde.leggTil(6);
 		
-		assertEquals(mengdeSnitt, delMengde.snitt(intMengde1));
-		assertNotEquals(mengdeSnitt, delMengde.snitt(intMengde2));
+		assertEquals(tomMengde, delMengde.snitt(intMengde1));
+		assertNotEquals(tomMengde, delMengde.snitt(intMengde2));
 	}
 	
 	@Test
 	void testUnion() {
-		MengdeADT<Integer> mengdeUnion = new MengdeTabell<>();
-		mengdeUnion = intMengde1.union(intMengde2);
-		tomMengde.leggTilAlleFra(intMengde1);
-		tomMengde.leggTilAlleFra(intMengde2);
-		assertTrue(mengdeUnion.erLik(tomMengde));
+		tomMengde = intMengde1.union(intMengde2);
+		tomMengde2.leggTilAlleFra(intMengde1);
+		tomMengde2.leggTilAlleFra(intMengde2);
+		assertTrue(tomMengde.erLik(tomMengde2));
 	}
 
 	@Test
 	void testMinus() {
-		MengdeADT<Integer> mengdeMinus = new MengdeTabell<>();
-		mengdeMinus.leggTil(1);
-		mengdeMinus.leggTil(2);
-		assertTrue(mengdeMinus.erLik(intMengde1.minus(intMengde2)));
+		tomMengde.leggTil(1);
+		tomMengde.leggTil(2);
+		assertTrue(tomMengde.erLik(intMengde1.minus(intMengde2)));
 	}
 }

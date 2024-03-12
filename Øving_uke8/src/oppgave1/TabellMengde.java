@@ -3,19 +3,19 @@ package oppgave1;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MengdeTabell<T> implements MengdeADT<T>{
+public class TabellMengde<T> implements MengdeADT<T>{
 
 	private static final int DEFAULT_CAPACITY = 10;
 	
 	private T[] tabell;
 	private int antall;
 	
-	public MengdeTabell() {
+	public TabellMengde() {
 		this(DEFAULT_CAPACITY);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public MengdeTabell(int kapasitet) {
+	public TabellMengde(int kapasitet) {
 		tabell = (T[]) new Object[kapasitet];
 		antall = 0;
 	}	
@@ -38,7 +38,7 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 		if (getClass() != obj.getClass())
 			return false;
 		@SuppressWarnings("unchecked")
-		MengdeTabell<T> other = (MengdeTabell<T>) obj;
+		TabellMengde<T> other = (TabellMengde<T>) obj;
 		return antall == other.antall && Arrays.deepEquals(tabell, other.tabell);
 	}
 
@@ -71,12 +71,7 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public boolean erLik(MengdeADT<T> annenMengde) {
-		for(int i=0; i<annenMengde.antallElementer(); i++) {
-			T element = tabell[i];
-			if (!annenMengde.inneholder(element)) {
-				return false;
-			}
-		}
+		this.erDelmengdeAv(annenMengde);
 		if (annenMengde.antallElementer() != antall) {
 			return false;
 		}
@@ -96,7 +91,7 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public MengdeADT<T> snitt(MengdeADT<T> annenMengde) {
-		MengdeADT<T> snittMengde = new MengdeTabell<>();
+		MengdeADT<T> snittMengde = new TabellMengde<>();
 		
 		for(int i=0; i<antall; i++) {
 			T element = tabell[i];
@@ -110,7 +105,7 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public MengdeADT<T> union(MengdeADT<T> annenMengde) {
-		MengdeADT<T> unionMengde = new MengdeTabell<>();
+		MengdeADT<T> unionMengde = new TabellMengde<>();
 		unionMengde.leggTilAlleFra(annenMengde);
 		unionMengde.leggTilAlleFra(this);
 
@@ -119,7 +114,7 @@ public class MengdeTabell<T> implements MengdeADT<T>{
 
 	@Override
 	public MengdeADT<T> minus(MengdeADT<T> annenMengde) {
-		MengdeADT<T> minusMengde = new MengdeTabell<>();
+		MengdeADT<T> minusMengde = new TabellMengde<>();
 		
 		for(int i=0; i<antall; i++) {
 			T element = tabell[i];
