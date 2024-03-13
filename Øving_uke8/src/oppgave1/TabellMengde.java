@@ -99,7 +99,6 @@ public class TabellMengde<T> implements MengdeADT<T>{
 				snittMengde.leggTil(element);
 			}
 		}
-
 		return snittMengde;
 	}
 
@@ -122,7 +121,6 @@ public class TabellMengde<T> implements MengdeADT<T>{
 				minusMengde.leggTil(element);
 			}
 		}
-
 		return minusMengde;
 	}
 

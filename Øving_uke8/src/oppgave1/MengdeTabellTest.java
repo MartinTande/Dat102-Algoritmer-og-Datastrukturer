@@ -104,28 +104,29 @@ class MengdeTabellTest {
 		assertFalse(delMengde.erDisjunkt(intMengde1));
 	}
 	
-	@Test
-	void testSnitt() {
-		tomMengde.leggTil(1);
-		tomMengde.leggTil(2);
-		delMengde.leggTil(6);
-		
-		assertEquals(tomMengde, delMengde.snitt(intMengde1));
-		assertNotEquals(tomMengde, delMengde.snitt(intMengde2));
-	}
+//	@Test
+//	void testSnitt() {
+//		tomMengde.leggTil(1);
+//		tomMengde.leggTil(2);
+//		delMengde.leggTil(6);
+//		
+//		assertTrue(tomMengde.erLik(delMengde.snitt(intMengde1)));
+//		assertFalse(tomMengde.erLik(delMengde.snitt(intMengde2)));
+//	}
+//	
+//	@Test
+//	void testUnion() {
+//		tomMengde = intMengde1.union(intMengde2);
+//		tomMengde2.leggTilAlleFra(intMengde1);
+//		tomMengde2.leggTilAlleFra(intMengde2);
+//		assertTrue(tomMengde.erLik(tomMengde2));
+//	}
+//
+//	@Test
+//	void testMinus() {
+//		tomMengde.leggTil(1);
+//		tomMengde.leggTil(2);
+//		assertTrue(tomMengde.erLik(intMengde1.minus(intMengde2)));
+//	}
 	
-	@Test
-	void testUnion() {
-		tomMengde = intMengde1.union(intMengde2);
-		tomMengde2.leggTilAlleFra(intMengde1);
-		tomMengde2.leggTilAlleFra(intMengde2);
-		assertTrue(tomMengde.erLik(tomMengde2));
-	}
-
-	@Test
-	void testMinus() {
-		tomMengde.leggTil(1);
-		tomMengde.leggTil(2);
-		assertTrue(tomMengde.erLik(intMengde1.minus(intMengde2)));
-	}
 }

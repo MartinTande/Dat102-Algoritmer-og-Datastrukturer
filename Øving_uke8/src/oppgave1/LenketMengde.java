@@ -50,7 +50,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			if (!annenMengde.inneholder(temp.data)) {
 				return false;
 			}
-			
+			temp = temp.neste;
 		}
 		return true;
 	}
@@ -78,8 +78,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 
 	@Override
 	public MengdeADT<T> snitt(MengdeADT<T> annenMengde) {
-		MengdeADT<T> snittMengde = new TabellMengde<>();
-		
+		MengdeADT<T> snittMengde = new LenketMengde<>();
 		Node temp = forste;
 		while(temp != null) {
 			if (annenMengde.inneholder(temp.data)) {
@@ -87,13 +86,12 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			}
 			temp = temp.neste;
 		}
-
 		return snittMengde;
 	}
 
 	@Override
 	public MengdeADT<T> union(MengdeADT<T> annenMengde) {
-		MengdeADT<T> unionMengde = new TabellMengde<>();
+		MengdeADT<T> unionMengde = new LenketMengde<>();
 		unionMengde.leggTilAlleFra(annenMengde);
 		unionMengde.leggTilAlleFra(this);
 
@@ -102,7 +100,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
 
 	@Override
 	public MengdeADT<T> minus(MengdeADT<T> annenMengde) {
-		MengdeADT<T> minusMengde = new TabellMengde<>();
+		MengdeADT<T> minusMengde = new LenketMengde<>();
 		Node temp = forste;
 		while(temp != null) {
 			if (!annenMengde.inneholder(temp.data)) {
@@ -110,7 +108,6 @@ public class LenketMengde<T> implements MengdeADT<T>{
 			}
 			temp = temp.neste;
 		}
-
 		return minusMengde;
 	}
 
@@ -124,15 +121,19 @@ public class LenketMengde<T> implements MengdeADT<T>{
 		forste = ny;
 		antall++;	
 	}
-
+	
 	@Override
 	public void leggTilAlleFra(MengdeADT<T> annenMengde) {
 		Node temp = forste;
 		while(temp != null) {
-			if (!this.inneholder(temp.data)) {
-				leggTil(temp.data);
+			if (!annenMengde.inneholder(temp.data)) {
+				annenMengde.leggTil(temp.data);
 			}
 			temp = temp.neste;
+		}
+		;
+		for (int i = 0; i < annenMengde.antallElementer(); i++) {
+			this.leggTil(annenMengde.tilTabell()[i]);
 		}
 	}
 
@@ -163,4 +164,5 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	public int antallElementer() {
 		return antall;
 	}
+	
 }
