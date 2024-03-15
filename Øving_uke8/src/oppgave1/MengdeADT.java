@@ -1,7 +1,7 @@
 package oppgave1;
 
 
-public interface MengdeADT<T> {
+public interface MengdeADT<T> extends Iterable<T>{
 	
 	/**
 	 * @return Om mengden er tom

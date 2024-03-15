@@ -1,14 +1,15 @@
 package oppgave1;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 
 public class JavaSetToMengde<T> implements MengdeADT<T> {
-
-	private Set<T> set = new HashSet<>();
 	
+	
+	private Set<T> set = new HashSet<>();
+
 
 	@Override
 	public boolean erTom() {
@@ -49,41 +50,36 @@ public class JavaSetToMengde<T> implements MengdeADT<T> {
 		return true;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public MengdeADT<T> snitt(MengdeADT<T> annenMengde) {
-		Set<T> snittSet = new HashSet<>();
+		MengdeADT<T> snittSet = new JavaSetToMengde<>();
 		
 		for(T element : set) {
 			if (annenMengde.inneholder(element)) {
-				snittSet.add(element);
+				snittSet.leggTil(element);
 			}
 		}
-
 		return (MengdeADT<T>) snittSet;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public MengdeADT<T> union(MengdeADT<T> annenMengde) {
-		Set<T> unionSet = new HashSet<>();
-		unionSet.addAll((Collection<? extends T>) annenMengde);
-		unionSet.addAll((Collection<? extends T>) set);
+		MengdeADT<T> unionSet = new JavaSetToMengde<>();
+		unionSet.leggTilAlleFra(annenMengde);
+		unionSet.leggTilAlleFra(this);
 		return (MengdeADT<T>) unionSet;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public MengdeADT<T> minus(MengdeADT<T> annenMengde) {
-		Set<T> minusSet = new HashSet<>();
+		MengdeADT<T> minusSet = new JavaSetToMengde<>();
 		
 		for(T element : set) {
 			if (!annenMengde.inneholder(element)) {
-				minusSet.add(element);
+				minusSet.leggTil(element);
 			}
 		}
-
-		return (MengdeADT<T>) minusSet;
+		return minusSet;
 	}
 
 	@Override
@@ -91,10 +87,12 @@ public class JavaSetToMengde<T> implements MengdeADT<T> {
 		set.add(element);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void leggTilAlleFra(MengdeADT<T> annenMengde) {
-		set.addAll((Collection<? extends T>) annenMengde);
+		T[] annenTabell = annenMengde.tilTabell();
+		for (int i = 0; i < annenMengde.antallElementer(); i++) {
+			set.add(annenTabell[i]);
+		}
 	}
 
 	@Override
@@ -112,6 +110,12 @@ public class JavaSetToMengde<T> implements MengdeADT<T> {
 	@Override
 	public int antallElementer() {
 		return set.size();
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,10 +1,36 @@
 package oppgave1;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class TabellMengde<T> implements MengdeADT<T>{
 
+	/* ------------------------------------------------------------------- */
+
+	private class TabellMengdeIterator implements Iterator<T> {
+		
+		private int nesteIndeks = 0;
+
+		@Override
+		public boolean hasNext() {
+			return nesteIndeks < antall;
+		}
+
+		@Override
+		public T next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException(
+						"Ulovlig å kalle next() hvis iterator.!hasNext().");
+			}
+			return tabell[nesteIndeks++];
+		}
+	}
+	
+	/* ------------------------------------------------------------------- */
+	
+	
 	private static final int DEFAULT_CAPACITY = 10;
 	
 	private T[] tabell;
@@ -177,6 +203,11 @@ public class TabellMengde<T> implements MengdeADT<T>{
 	@Override
 	public int antallElementer() {
 		return antall;
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new TabellMengdeIterator();
 	}
 
 }

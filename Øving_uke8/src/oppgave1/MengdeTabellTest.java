@@ -17,12 +17,12 @@ class MengdeTabellTest {
 	@BeforeEach
 	void setUp() throws Exception {
 
-		intMengde1 = new LenketMengde<>();
-		intMengde2 = new LenketMengde<>();
-		intMengde3 = new LenketMengde<>();
-		tomMengde = new LenketMengde<>();
-		tomMengde2 = new LenketMengde<>();
-		delMengde = new LenketMengde<>();
+		intMengde1 = new JavaSetToMengde<>();
+		intMengde2 = new JavaSetToMengde<>();
+		intMengde3 = new JavaSetToMengde<>();
+		tomMengde = new JavaSetToMengde<>();
+		tomMengde2 = new JavaSetToMengde<>();
+		delMengde = new JavaSetToMengde<>();
 		
 		intMengde1.leggTil(1);
 		intMengde1.leggTil(2);
@@ -104,29 +104,28 @@ class MengdeTabellTest {
 		assertFalse(delMengde.erDisjunkt(intMengde1));
 	}
 	
-//	@Test
-//	void testSnitt() {
-//		tomMengde.leggTil(1);
-//		tomMengde.leggTil(2);
-//		delMengde.leggTil(6);
-//		
-//		assertTrue(tomMengde.erLik(delMengde.snitt(intMengde1)));
-//		assertFalse(tomMengde.erLik(delMengde.snitt(intMengde2)));
-//	}
-//	
-//	@Test
-//	void testUnion() {
-//		tomMengde = intMengde1.union(intMengde2);
-//		tomMengde2.leggTilAlleFra(intMengde1);
-//		tomMengde2.leggTilAlleFra(intMengde2);
-//		assertTrue(tomMengde.erLik(tomMengde2));
-//	}
-//
-//	@Test
-//	void testMinus() {
-//		tomMengde.leggTil(1);
-//		tomMengde.leggTil(2);
-//		assertTrue(tomMengde.erLik(intMengde1.minus(intMengde2)));
-//	}
+	@Test
+	void testSnitt() {
+		tomMengde.leggTil(1);
+		tomMengde.leggTil(2);
+		delMengde.leggTil(6);
+		
+		assertTrue(tomMengde.erLik(delMengde.snitt(intMengde1)));
+		assertFalse(tomMengde.erLik(delMengde.snitt(intMengde2)));
+	}
 	
+	@Test
+	void testUnion() {
+		tomMengde = intMengde1.union(intMengde2);
+		tomMengde2.leggTilAlleFra(intMengde1);
+		tomMengde2.leggTilAlleFra(intMengde2);
+		assertTrue(tomMengde.erLik(tomMengde2));
+	}
+
+	@Test
+	void testMinus() {
+		tomMengde.leggTil(1);
+		tomMengde.leggTil(2);
+		assertTrue(tomMengde.erLik(intMengde1.minus(intMengde2)));
+	}
 }

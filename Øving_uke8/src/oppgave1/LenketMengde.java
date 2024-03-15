@@ -1,5 +1,7 @@
 package oppgave1;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LenketMengde<T> implements MengdeADT<T>{
 
@@ -26,6 +28,39 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	
 	/************************************************************/
 
+	/* ------------------------------------------------------------------- */
+
+	private class LenketMengdeIterator implements Iterator<T> {
+		
+		Node nesteNode = forste;
+		
+		@Override
+		public boolean hasNext() {
+			return nesteNode != null;
+		}
+
+		@Override
+		public T next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException(
+						"Ulovlig å kalle next() hvis iterator.!hasNext().");
+			}
+			T data = nesteNode.data;
+			nesteNode = nesteNode.neste;
+			return data;
+		}
+	}
+	
+	/* ------------------------------------------------------------------- */
+
+	@Override
+	public Iterator<T> iterator() {
+		return new LenketMengdeIterator();
+	}
+
+	/* ------------------------------------------------------------------- */
+	
+	
 	@Override
 	public boolean erTom() {
 		return antall == 0;
@@ -124,16 +159,10 @@ public class LenketMengde<T> implements MengdeADT<T>{
 	
 	@Override
 	public void leggTilAlleFra(MengdeADT<T> annenMengde) {
-		Node temp = forste;
-		while(temp != null) {
-			if (!annenMengde.inneholder(temp.data)) {
-				annenMengde.leggTil(temp.data);
+		for(T element : annenMengde) {
+			if (!inneholder(element)) {
+				leggTil(element);
 			}
-			temp = temp.neste;
-		}
-		;
-		for (int i = 0; i < annenMengde.antallElementer(); i++) {
-			this.leggTil(annenMengde.tilTabell()[i]);
 		}
 	}
 
